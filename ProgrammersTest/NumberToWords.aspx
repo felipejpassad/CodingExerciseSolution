@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Test 2" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Test2.aspx.vb" Inherits="ProgrammersTest.Contact" %>
+﻿<%@ Page Title="Number to Words Conversion" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NumberToWords.aspx.vb" Inherits="ProgrammersTest.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
      <!-- 1. Referência ao jQuery (MUITO IMPORTANTE: carregue este PRIMEIRO!) -->
@@ -6,27 +6,45 @@
     <!-- 2. Referência ao plugin jQuery MaskMoney (carregue este DEPOIS do jQuery) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
-    <main aria-labelledby="title">
-        <h2 id="title"><%: Title %></h2>
-        <p>Write some code that will accept an amount and convert it to the appropriate string representation.</p>
+   <main aria-labelledby="title" class="container my-4">
+    <h2 id="title" class="mb-3"><%: Title %></h2>
+
+    <section class="mb-4">
         <p>
-            Example: Convert 2523.04 to "Two thousand five hundred twenty-three and 04/100 dollars"
+            Enter a numeric amount to convert it into its full string representation in dollars.
         </p>
-    </main>
+        <p>
+            <strong>Example:</strong> <code>2523.04</code> → 
+            <em>"Two thousand five hundred twenty-three and 04/100 dollars"</em>
+        </p>
+    </section>
 
-    <div class="row">
-        <div class="col-1">
-            <asp:Label runat="server" Text="Amount: " />
+    <section class="form-area">
+        <div class="row mb-3">
+            <div class="col-2">
+                <asp:Label runat="server" 
+                           AssociatedControlID="txtNumber" 
+                           Text="Value:" 
+                           CssClass="form-label fw-bold" />
+            </div>
+            <div class="col-4">
+                <asp:TextBox runat="server" 
+                             ID="txtNumber" 
+                             placeholder="Write here a value..." 
+                             MaxLength="21" 
+                             CssClass="form-control" />
+            </div>
         </div>
-        <div class="col-2">
-            <asp:TextBox runat="server" ID="txtNumber" placeholder="write here an amount..." MaxLength="21"/>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <asp:Label runat="server" ID="lblResponse" />
-    </div>
 
+        <div class="row">
+            <div class="col-6">
+                <asp:Label runat="server" 
+                           ID="lblResponse" 
+                           CssClass="result-label fw-semibold" />
+            </div>
+        </div>
+    </section>
+</main>
 
     <script type="text/javascript">
 
@@ -176,7 +194,10 @@
            
 
             if (unit === 0) return `${wordHundreds} ${wordDozens}`;
-            else return `${wordHundreds} ${wordDozens}-${wordUnit}`;
+            else {
+                if (wordDozens != "") return `${wordHundreds} ${wordDozens}-${wordUnit}`;
+                else return `${wordHundreds}-${wordUnit}`;
+            } 
         }
 
 

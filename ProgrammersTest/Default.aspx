@@ -2,42 +2,48 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <main>
-        <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">Felipe Assad</h1>
-            <p class="lead">This webform contains the Programmers Test made by Felipe Assad. Click on the bars on top of the page to see the two tests.</p>
-        </section>
 
-        <%--<div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-                <p>
-                    ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-                A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="librariesTitle">
-                <h2 id="librariesTitle">Get more libraries</h2>
-                <p>
-                    NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="hostingTitle">
-                <h2 id="hostingTitle">Web Hosting</h2>
-                <p>
-                    You can easily find a web hosting company that offers the right mix of features and price for your applications.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-                </p>
-            </section>
-        </div>--%>
-    </main>
+
+    <main>
+    <section class="row" aria-labelledby="pageTitle">
+        <h1 id="pageTitle">Coding Exercise Solution</h1>
+        <br/>
+        <br/>
+        <br/>
+        <p>
+            This project was developed as part of a technical evaluation using 
+            <strong>VB.NET</strong>, <strong>WebForms</strong>, and <strong>jQuery</strong>.
+        </p>
+        <p>
+            The solution contains implementations of two selected exercises:
+        </p>
+    </section>
+
+    <section>
+        <article>
+            <h2>Exercise 1 – Number to Words Conversion</h2>
+            <p>
+                Converts a numeric amount into its string-based representation in dollars.
+            </p>
+            <p>
+                <a class="btn btn-primary" runat="server" href="~/Palindrome">
+                    Go to Exercise 1
+                </a>
+            </p>
+        </article>
+
+        <article>
+            <h2>Exercise 6 – Palindrome Checker</h2>
+            <p>
+                Checks whether a positive number is a palindrome (reads the same forward and backward).
+            </p>
+            <p>
+                <a class="btn btn-primary" runat="server" href="~/NumberToWords">
+                    Go to Exercise 6
+                </a>
+            </p>
+        </article>
+    </section>
+</main>
 
 </asp:Content>

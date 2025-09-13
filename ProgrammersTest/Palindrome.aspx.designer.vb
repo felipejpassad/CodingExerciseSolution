@@ -23,6 +23,15 @@ Partial Public Class About
     Protected WithEvents txtNumber As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''btnCheck control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCheck As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''lblResponse control.
     '''</summary>
     '''<remarks>
@@ -30,4 +39,13 @@ Partial Public Class About
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblResponse As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblResponseBtn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblResponseBtn As Global.System.Web.UI.WebControls.Label
 End Class
