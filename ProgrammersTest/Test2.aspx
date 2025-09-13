@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="Test 2" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Test2.aspx.vb" Inherits="ProgrammersTest.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+     <!-- 1. Referência ao jQuery (MUITO IMPORTANTE: carregue este PRIMEIRO!) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 2. Referência ao plugin jQuery MaskMoney (carregue este DEPOIS do jQuery) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+
     <main aria-labelledby="title">
         <h2 id="title"><%: Title %></h2>
         <p>Write some code that will accept an amount and convert it to the appropriate string representation.</p>
@@ -14,7 +19,7 @@
             <asp:Label runat="server" Text="Amount: " />
         </div>
         <div class="col-2">
-            <asp:TextBox runat="server" ID="txtNumber" placeholder="write here an amount..." />
+            <asp:TextBox runat="server" ID="txtNumber" placeholder="write here an amount..." MaxLength="21"/>
         </div>
     </div>
     <br />
@@ -28,30 +33,17 @@
         $(document).ready(function () {
             var txtNumber = $('#<%= txtNumber.ClientID %>');
 
-            txtNumber.on('keypress', function (event) {
-                var charCode = event.which;
-                var currentValue = $(this).val();
-
-                // Teclas de controle 
-                if (charCode < 32) {
-                    return;
-                }
-
-                if (charCode === 46) {
-                    if (currentValue.includes(',') || currentValue.includes('.')) {
-                        event.preventDefault();
-                    }
-                    return;
-                }
-
-                if (charCode < 48 || charCode > 57) {
-                    event.preventDefault();
-                }
+            txtNumber.maskMoney({
+                prefix: '$ ',            
+                thousands: ',',          
+                decimal: '.',            
+                allowZero: false,         
+                affixesStay: true,       
             });
 
-            txtNumber.on('input', function () {
-                var currentValue = $(this).val();
-                calculateNumber(currentValue);
+            txtNumber.on('keyup', function (event) {
+                var unmaskedValue = $(this).maskMoney('unmasked')[0]; 
+                calculateNumber(unmaskedValue);
             });
         });
 
@@ -68,33 +60,26 @@
                 return;
             }
 
-            var value = number.split('.')[0];
-            var cents = number.split('.')[1];
-
+            var value = Math.floor(number);
+            var cents = Math.round((number - value) * 100); 
 
             if (value && value !== "") responseDollars += convertNumberToWords(value);
             if (cents && cents !== "") responseCents += convertCentsIntoFraction(cents);
 
-            if (responseDollars !== "" && responseCents !== "") response = responseDollars + " and " + responseCents;
+            if (!responseDollars.includes("Please") && responseDollars !== "" && responseCents !== "") response = responseDollars + " and " + responseCents;
             else if (responseDollars && responseDollars !== "") response = responseDollars;
             else response = responseCents;
 
             response === "One  " || response === "Zero" ? response += " dollar." : response += " dollars.";
-            lblResponse.text(response).css('font-weight', 'bold');
+            lblResponse.text(firstLetterUpper(response)).css('font-weight', 'bold');
         }
 
         function convertCentsIntoFraction(value) {
-            var num = new Number("0." + value);
-            const cents = num.toFixed(2) * 100;
-
-            var resp = cents;
-
-            if (cents === 0) {
+            if (value === 0) {
                 return "";
             } else {
-                if (cents >= 0 && cents < 10) resp = '0' + cents;
-                return resp + "/100"
-
+                if (value >= 0 && value < 10) return '0' + value + '/100';
+                return value + "/100"
             }
         }
 
@@ -132,14 +117,13 @@
                 p++;
             }
 
-            return firstLetterUpper(fullResp);
+            return fullResp;
         }
 
         function createFullNumber(elem, index) {
             const units = [
                 "", "", "thousand", "million", "billion"
             ]
-
             return figureOutUpTo99(elem) + " " + units[index] + " ";
         }
 
@@ -180,10 +164,16 @@
             const dozens = Math.floor(new Number(num % 100) / 10);
             const unit = Math.floor(new Number(num % 100) % 10);
 
-            //build the response
             const wordHundreds = units[hundreds] + (units[hundreds] !== "" ? " hundred" : "");
-            const wordDozens = tens[dozens];
-            const wordUnit = units[unit];
+            var wordDozens = tens[dozens];
+            var wordUnit = units[unit];
+
+            //adjust 11-19 
+            if (dozens == 1) {
+                wordDozens = teens[unit];
+                unit = 0;
+            }
+           
 
             if (unit === 0) return `${wordHundreds} ${wordDozens}`;
             else return `${wordHundreds} ${wordDozens}-${wordUnit}`;
@@ -191,11 +181,10 @@
 
 
         function firstLetterUpper(str) {
-
             if (!str) {
                 return "";
             }
-
+            str = str.trim();
             const firstChar = str.charAt(0).toUpperCase();
             const restOfString = str.slice(1).toLowerCase();
             return firstChar + restOfString;
