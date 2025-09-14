@@ -16,12 +16,14 @@
         </section>
 
         <section class="input-area">
+            <asp:HiddenField ID="hfValue" runat="server" />
             <div class="row">
                 <div class="col-1">
                     <asp:Label runat="server" AssociatedControlID="txtNumber" Text="Number:" />
                 </div>
                 <div class="col-2">
                     <asp:TextBox
+                        Text='<%# ResponseValue %>'
                         runat="server"
                         ID="txtNumber"
                         CssClass="form-control"
@@ -36,6 +38,8 @@
                         OnClick="btnCheck_Click" />
                 </div>
             </div>
+            <br/>
+            <br/>
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-5">
@@ -74,8 +78,6 @@
             var lblResponse = $('#<%= lblResponse.ClientID %>');
             var lblResponseBtn = $('#<%= lblResponseBtn.ClientID %>');
 
-            lblResponseBtn.text('');
-
             if (number === "") {
                 lblResponse.text('');
                 return;
@@ -84,10 +86,12 @@
             var reversedNumber = number.split('').reverse().join('');
 
             if (number === reversedNumber) {
-                lblResponse.text(number + ' IS a palindrome!').css('color', 'green');
+                lblResponse.text('javascript: ' + number + ' IS a palindrome!').css('color', 'green');
             } else {
-                lblResponse.text(number + ' is NOT a palindrome.').css('color', 'red');
+                lblResponse.text('javascript: ' + number + ' is NOT a palindrome.').css('color', 'red');
             }
+            console.log(lblResponse.text());
+            $("#<%= hfValue.ClientID %>").val(lblResponse.text());
         }
     </script>
 </asp:Content>
