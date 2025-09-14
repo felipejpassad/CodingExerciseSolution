@@ -1,9 +1,7 @@
 ﻿<%@ Page Title="Number to Words Conversion" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NumberToWords.aspx.vb" Inherits="ProgrammersTest.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-     <!-- 1. Referência ao jQuery (MUITO IMPORTANTE: carregue este PRIMEIRO!) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- 2. Referência ao plugin jQuery MaskMoney (carregue este DEPOIS do jQuery) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
    <main aria-labelledby="title" class="container my-4">
@@ -88,8 +86,14 @@
             else if (responseDollars && responseDollars !== "") response = responseDollars;
             else response = responseCents;
 
-            response === "One  " || response === "Zero" ? response += " dollar." : response += " dollars.";
-            lblResponse.text(firstLetterUpper(response)).css('font-weight', 'bold');
+            if (response.trim() != "") {
+                response === "One  " || response === "Zero" ? response += " dollar." : response += " dollars.";
+                lblResponse.text(firstLetterUpper(response)).css('font-weight', 'bold');
+            }
+            else {
+                lblResponse.text("");
+            }
+            
         }
 
         function convertCentsIntoFraction(value) {

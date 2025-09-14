@@ -89,7 +89,7 @@
             } else {
                 lblResponse.text('javascript: ' + number + ' is NOT a palindrome.').css('color', 'red');
             }
-            console.log(lblResponse.text());
+
             $("#<%= hfValue.ClientID %>").val(lblResponse.text());
         }
     </script>
