@@ -23,7 +23,6 @@
                 </div>
                 <div class="col-2">
                     <asp:TextBox
-                        Text='<%# ResponseValue %>'
                         runat="server"
                         ID="txtNumber"
                         CssClass="form-control"

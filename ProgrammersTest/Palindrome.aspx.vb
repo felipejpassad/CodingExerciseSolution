@@ -2,14 +2,14 @@
     Inherits Page
 
 
-    Public Property ResponseValue As String
-        Get
-            Return ViewState("ResponseValue")
-        End Get
-        Set(value As String)
-            ViewState("ResponseValue") = value
-        End Set
-    End Property
+    'Public Property ResponseValue As String
+    '    Get
+    '        Return ViewState("ResponseValue")
+    '    End Get
+    '    Set(value As String)
+    '        ViewState("ResponseValue") = value
+    '    End Set
+    'End Property
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
@@ -25,13 +25,15 @@
 
     Protected Sub btnCheck_Click(sender As Object, e As EventArgs) Handles btnCheck.Click
 
-        ResponseValue = hfValue.Value
+        'ResponseValue = hfValue.Value
 
         Dim input As String = txtNumber.Text.Trim()
 
         If String.IsNullOrEmpty(input) Then
             lblResponseBtn.Text = "Please enter a number."
             lblResponseBtn.Style.Add("color", "red")
+            hfValue.Value = ""
+            lblResponse.Text = ""
             Return
         End If
 
