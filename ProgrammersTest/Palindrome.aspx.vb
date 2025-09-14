@@ -25,22 +25,15 @@
             Return
         End If
 
-        Dim number As Integer
-        If Not Integer.TryParse(input, number) OrElse number < 0 Then
-            lblResponseBtn.Text = "Invalid input. Please enter a positive number."
-            lblResponseBtn.Style.Add("color", "red")
-            Return
-        End If
-
-        Dim numberStr As String = number.ToString()
+        Dim numberStr As String = input.ToString()
         Dim reversedStr As String = StrReverse(numberStr)
 
         If numberStr = reversedStr Then
-            lblResponseBtn.Text = "VB: " & number & " IS a palindrome!"
+            lblResponseBtn.Text = "VB: " & input & " IS a palindrome!"
             lblResponseBtn.Style.Add("color", "green")
             lblResponse.Style.Add("color", "green")
         Else
-            lblResponseBtn.Text = "VB: " & number & " is NOT a palindrome."
+            lblResponseBtn.Text = "VB: " & input & " is NOT a palindrome."
             lblResponseBtn.Style.Add("color", "red")
             lblResponse.Style.Add("color", "red")
         End If

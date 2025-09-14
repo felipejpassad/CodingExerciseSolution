@@ -4,45 +4,46 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
-   <main aria-labelledby="title" class="container my-4">
-    <h2 id="title" class="mb-3"><%: Title %></h2>
+    <main aria-labelledby="title" class="container my-4">
+        <h2 id="title" class="mb-3"><%: Title %></h2>
 
-    <section class="mb-4">
-        <p>
-            Enter a numeric amount to convert it into its full string representation in dollars.
-        </p>
-        <p>
-            <strong>Example:</strong> <code>2523.04</code> → 
+        <section class="mb-4">
+            <p>
+                Enter a numeric amount to convert it into its full string representation in dollars.
+            </p>
+            <p>
+                <strong>Example:</strong> <code>2523.04</code> → 
             <em>"Two thousand five hundred twenty-three and 04/100 dollars"</em>
-        </p>
-    </section>
+            </p>
+        </section>
 
-    <section class="form-area">
-        <div class="row mb-3">
-            <div class="col-2">
-                <asp:Label runat="server" 
-                           AssociatedControlID="txtNumber" 
-                           Text="Value:" 
-                           CssClass="form-label fw-bold" />
+        <section class="form-area">
+            <div class="row mb-3">
+                <div class="col-2">
+                    <asp:Label runat="server"
+                        AssociatedControlID="txtNumber"
+                        Text="Value:"
+                        CssClass="form-label fw-bold" />
+                </div>
+                <div class="col-4">
+                    <asp:TextBox runat="server"
+                        ID="txtNumber"
+                        placeholder="Write here a value..."
+                        MaxLength="21"
+                        CssClass="form-control" />
+                </div>
             </div>
-            <div class="col-4">
-                <asp:TextBox runat="server" 
-                             ID="txtNumber" 
-                             placeholder="Write here a value..." 
-                             MaxLength="21" 
-                             CssClass="form-control" />
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-6">
-                <asp:Label runat="server" 
-                           ID="lblResponse" 
-                           CssClass="result-label fw-semibold" />
+            <div class="row">
+                <div class="col-6">
+                    <asp:Label runat="server"
+                        ID="lblResponse"
+                        CssClass="result-label fw-semibold" />
+                </div>
             </div>
-        </div>
-    </section>
-</main>
+            
+        </section>
+    </main>
 
     <script type="text/javascript">
 
@@ -150,7 +151,7 @@
         }
 
         function figureOutUpTo999(num) {
-            console.log(num);
+
             const units = [
                 "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
             ];
