@@ -2,16 +2,6 @@
     Inherits Page
 
 
-    'Public Property ResponseValue As String
-    '    Get
-    '        Return ViewState("ResponseValue")
-    '    End Get
-    '    Set(value As String)
-    '        ViewState("ResponseValue") = value
-    '    End Set
-    'End Property
-
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
             lblResponse.Text = ""
@@ -24,8 +14,6 @@
 
 
     Protected Sub btnCheck_Click(sender As Object, e As EventArgs) Handles btnCheck.Click
-
-        'ResponseValue = hfValue.Value
 
         Dim input As String = txtNumber.Text.Trim()
 
@@ -44,7 +32,6 @@
             Return
         End If
 
-        ' Converte para string para checar palíndromo
         Dim numberStr As String = number.ToString()
         Dim reversedStr As String = StrReverse(numberStr)
 
