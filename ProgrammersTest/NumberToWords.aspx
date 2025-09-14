@@ -146,11 +146,11 @@
             const units = [
                 "", "", "thousand", "million", "billion"
             ]
-            return figureOutUpTo99(elem) + " " + units[index] + " ";
+            return figureOutUpTo999(elem) + " " + units[index] + " ";
         }
 
-        function figureOutUpTo99(num) {
-
+        function figureOutUpTo999(num) {
+            console.log(num);
             const units = [
                 "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
             ];
@@ -181,22 +181,23 @@
             if (integerNum < 20) {
                 return teens[integerNum - 10];
             }
-
+            
             var hundreds = Math.floor(new Number(num / 100));
             const dozens = Math.floor(new Number(num % 100) / 10);
-            const unit = Math.floor(new Number(num % 100) % 10);
+            var unit = Math.floor(new Number(num % 100) % 10);
 
+            
             const wordHundreds = units[hundreds] + (units[hundreds] !== "" ? " hundred" : "");
             var wordDozens = tens[dozens];
             var wordUnit = units[unit];
 
+           
             //adjust 11-19 
             if (dozens == 1) {
                 wordDozens = teens[unit];
                 unit = 0;
             }
-           
-
+          
             if (unit === 0) return `${wordHundreds} ${wordDozens}`;
             else {
                 if (wordDozens != "") return `${wordHundreds} ${wordDozens}-${wordUnit}`;
