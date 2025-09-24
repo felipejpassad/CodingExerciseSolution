@@ -57,14 +57,14 @@ The project includes two main exercises:
 
 ## 📂 **Project Structure**
 
-ProgrammersTest/
+```
+ ProgrammersTest/
 
-│
-
-├── **NumberToWords.aspx**   # Exercise 1 - Currency to words conversion
-
-├── **Palindrome.aspx**   # Exercise 2 - Palindrome checker
-
-├── **Palindrome.aspx.vb**   # Exercise 2 - Alternative implementation (code-behind)
-
-└── ... # Other files
+          ├── NumberToWords.aspx   # Exercise 1 - Currency to words conversion
+   
+          ├── Palindrome.aspx   # Exercise 2 - Palindrome checker
+   
+          ├── Palindrome.aspx.vb   # Exercise 2 - Alternative implementation (code-behind)
+   
+          └── ... # Other files
+```
