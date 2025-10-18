@@ -55,7 +55,7 @@
                 thousands: ',',          
                 decimal: '.',            
                 allowZero: false,         
-                affixesStay: true,       
+                affixesStay: true
             });
 
             txtNumber.on('keyup', function (event) {
@@ -80,41 +80,35 @@
             var value = Math.floor(number);
             var cents = Math.round((number - value) * 100); 
 
-            if (value && value !== "") responseDollars += convertNumberToWords(value);
-            if (cents && cents !== "") responseCents += convertCentsIntoFraction(cents);
+            if (value > 0) responseDollars += convertNumberToWords(value);
+            if (cents > 0) responseCents += convertCentsIntoFraction(cents);
 
             if (!responseDollars.includes("Please") && responseDollars !== "" && responseCents !== "") response = responseDollars + " and " + responseCents;
             else if (responseDollars && responseDollars !== "") response = responseDollars;
             else response = responseCents;
 
             if (response.trim() != "") {
-                response === "One  " || response === "Zero" ? response += " dollar." : response += " dollars.";
+                response.trim() === "one" ? response += " dollar." : response += " dollars.";
                 lblResponse.text(firstLetterUpper(response)).css('font-weight', 'bold');
             }
             else {
                 lblResponse.text("");
             }
-            
         }
 
         function convertCentsIntoFraction(value) {
-            if (value === 0) {
-                return "";
-            } else {
-                if (value >= 0 && value < 10) return '0' + value + '/100';
-                return value + "/100"
-            }
+            if (value >= 0 && value < 10) return '0' + value + '/100';
+            return value + "/100"
         }
 
         function convertNumberToWords(num) {
 
             const integerNumber = parseInt(num, 10);
+
             if (isNaN(integerNumber) || integerNumber < 0 || integerNumber > 999999999999) {
-                return "Please provide a number lower than one trillion";
+                return "Please provide a positive number lower than one trillion";
             }
-            if (integerNumber == 0) {
-                return "Zero";
-            }
+
             var numToString = integerNumber.toString();
 
             var k = 0;
@@ -147,7 +141,8 @@
             const units = [
                 "", "", "thousand", "million", "billion"
             ]
-            return figureOutUpTo999(elem) + " " + units[index] + " ";
+            if (elem > 0) return figureOutUpTo999(elem) + " " + units[index] + " ";
+            return "";            
         }
 
         function figureOutUpTo999(num) {
@@ -163,7 +158,6 @@
             const tens = [
                 "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
             ];
-
 
             // Validation
             const integerNum = parseInt(num, 10);
@@ -186,12 +180,10 @@
             var hundreds = Math.floor(new Number(num / 100));
             const dozens = Math.floor(new Number(num % 100) / 10);
             var unit = Math.floor(new Number(num % 100) % 10);
-
             
             const wordHundreds = units[hundreds] + (units[hundreds] !== "" ? " hundred" : "");
             var wordDozens = tens[dozens];
             var wordUnit = units[unit];
-
            
             //adjust 11-19 
             if (dozens == 1) {
@@ -205,7 +197,6 @@
                 else return `${wordHundreds}-${wordUnit}`;
             } 
         }
-
 
         function firstLetterUpper(str) {
             if (!str) {
